@@ -5,6 +5,10 @@
 # Last Updated: 9/26/2023
 #------------------------------------------------------------------------------
 
+# SNOWFLAKE ADVANTAGE: Snowpark Python API
+# SNOWFLAKE ADVANTAGE: Snowpark Python Task DAG API
+
+
 from datetime import timedelta
 
 #from snowflake.connector import connect

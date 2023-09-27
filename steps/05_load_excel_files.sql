@@ -5,6 +5,12 @@ Author:       Jeremiah Hansen
 Last Updated: 9/26/2023
 -----------------------------------------------------------------------------*/
 
+-- SNOWFLAKE ADVANTAGE: Snowpark governed file access
+-- SNOWFLAKE ADVANTAGE: Schema detection
+-- SNOWFLAKE ADVANTAGE: Snowflake Tables (not file-based)
+-- SNOWFLAKE ADVANTAGE: Python Stored Procedures
+
+
 USE ROLE HOL_ROLE;
 USE WAREHOUSE HOL_WH;
 USE SCHEMA HOL_DB.HOL_SCHEMA;

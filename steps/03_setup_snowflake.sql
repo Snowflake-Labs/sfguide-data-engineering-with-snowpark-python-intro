@@ -5,6 +5,8 @@ Author:       Jeremiah Hansen
 Last Updated: 9/26/2023
 -----------------------------------------------------------------------------*/
 
+-- SNOWFLAKE ADVANTAGE: Visual Studio Code Snowflake native extension (Git integration)
+
 
 -- ----------------------------------------------------------------------------
 -- Step #1: Accept Anaconda Terms & Conditions

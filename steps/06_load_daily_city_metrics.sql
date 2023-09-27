@@ -5,6 +5,10 @@ Author:       Jeremiah Hansen
 Last Updated: 9/26/2023
 -----------------------------------------------------------------------------*/
 
+-- SNOWFLAKE ADVANTAGE: Snowpark Python programmability
+-- SNOWFLAKE ADVANTAGE: Snowpark DataFrame API
+
+
 USE ROLE HOL_ROLE;
 USE WAREHOUSE HOL_WH;
 USE SCHEMA HOL_DB.HOL_SCHEMA;

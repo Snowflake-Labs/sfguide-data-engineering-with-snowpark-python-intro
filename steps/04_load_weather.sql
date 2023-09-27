@@ -6,7 +6,6 @@ Last Updated: 9/26/2023
 -----------------------------------------------------------------------------*/
 
 -- SNOWFLAKE ADVANTAGE: Data sharing/marketplace (instead of ETL)
--- SNOWFLAKE ADVANTAGE: Visual Studio Code Snowflake native extension (PrPr, Git integration)
 
 
 USE ROLE HOL_ROLE;
