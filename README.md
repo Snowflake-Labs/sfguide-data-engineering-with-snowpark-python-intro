@@ -6,4 +6,4 @@ This repository contains the code for the *Intro to Data Engineering with Snowpa
 ___
 Here is an overview of what we'll build in this lab:
 
-<img src="images/demo_overview.png" width=800px>
+<img src="images/hol_overview.png" width=800px>
