@@ -1,6 +1,6 @@
 /*-----------------------------------------------------------------------------
 Hands-On Lab: Intro to Data Engineering with Snowpark Python
-Script:       09_teardown.sql
+Script:       08_teardown.sql
 Author:       Jeremiah Hansen
 Last Updated: 9/26/2023
 -----------------------------------------------------------------------------*/
