@@ -89,8 +89,13 @@ def main(session: Session) -> str:
         dag_task2 = DAGTask("LOAD_LOCATION_TASK", definition="CALL LOAD_EXCEL_WORKSHEET_TO_TABLE_SP(BUILD_SCOPED_FILE_URL(@FROSTBYTE_RAW_STAGE, 'intro/location.xlsx'), 'location', 'LOCATION')", warehouse=warehouse_name)
         dag_task3 = DAGTask("LOAD_DAILY_CITY_METRICS_TASK", definition="CALL LOAD_DAILY_CITY_METRICS_SP()", warehouse=warehouse_name)
 
-        dag_task3 >> dag_task1
-        dag_task3 >> dag_task2
+    #    wrong task dependency / sequence definition
+    #    dag_task3 >> dag_task1
+    #    dag_task3 >> dag_task2
+    
+    #   corrected task dependency definition
+        dag_task1 >> dag_task3
+        dag_task2 >> dag_task3
 
     # Create the DAG in Snowflake
     dag_op.deploy(dag, mode="orreplace")
