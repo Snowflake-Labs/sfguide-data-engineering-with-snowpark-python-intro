@@ -40,7 +40,7 @@ HANDLER = 'main'
 AS
 $$
 from snowflake.snowpark.files import SnowflakeFile
-from openpyxl import load_workbook
+from openpyxl import load_workbook  #to open excel notebooks
 import pandas as pd
  
 def main(session, file_path, worksheet_name, target_table):
