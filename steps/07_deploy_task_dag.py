@@ -124,3 +124,5 @@ if __name__ == '__main__':
         print(main(session))  # type: ignore
 
     session.close()
+
+
