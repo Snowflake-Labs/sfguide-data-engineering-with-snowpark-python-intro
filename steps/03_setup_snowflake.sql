@@ -18,13 +18,14 @@ Last Updated: 9/26/2023
 -- ----------------------------------------------------------------------------
 -- Step #2: Create the account level objects (ACCOUNTADMIN part)
 -- ----------------------------------------------------------------------------
+
+--!jinja
 USE ROLE ACCOUNTADMIN;
 
 -- Roles
-SET MY_USER = CURRENT_USER();
 CREATE OR REPLACE ROLE HOL_ROLE;
 GRANT ROLE HOL_ROLE TO ROLE SYSADMIN;
-GRANT ROLE HOL_ROLE TO USER IDENTIFIER($MY_USER);
+GRANT ROLE HOL_ROLE TO USER identifier({{user}});
 
 GRANT EXECUTE TASK ON ACCOUNT TO ROLE HOL_ROLE;
 GRANT MONITOR EXECUTION ON ACCOUNT TO ROLE HOL_ROLE;
