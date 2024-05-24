@@ -35,13 +35,14 @@ CREATE OR REPLACE PROCEDURE LOAD_EXCEL_WORKSHEET_TO_TABLE_SP(file_path string, w
 RETURNS VARIANT
 LANGUAGE PYTHON
 RUNTIME_VERSION = '3.10'
-PACKAGES = ('snowflake-snowpark-python', 'pandas', 'openpyxl')
+PACKAGES = ('snowflake-snowpark-python', 'openpyxl')
 HANDLER = 'main'
 AS
 $$
 from snowflake.snowpark.files import SnowflakeFile
 from openpyxl import load_workbook
-import pandas as pd
+import modin.pandas as pd
+import snowflake.snowpark.modin.plugin
  
 def main(session, file_path, worksheet_name, target_table):
  with SnowflakeFile.open(file_path, 'rb') as f:
@@ -53,13 +54,9 @@ def main(session, file_path, worksheet_name, target_table):
      columns = next(data)[0:]
      # Create a DataFrame based on the second and subsequent lines of data
      df = pd.DataFrame(data, columns=columns)
- 
-     df2 = session.create_dataframe(df)
-     df2.write.mode("overwrite").save_as_table(target_table)
- 
+     df.to_snowflake(target_table, if_exists='replace',index=False)
  return True
 $$;
-
 
 -- ----------------------------------------------------------------------------
 -- Step 3: Load the Excel data
