@@ -38,9 +38,9 @@ def main(session: Session) -> str:
     table_name = "DAILY_CITY_METRICS"
 
     # Define the tables
-    order_detail = session.table("ORDER_DETAIL")
+    order_detail = session.table("RAW_POS.ORDER_DETAIL")
     history_day = session.table("FROSTBYTE_WEATHERSOURCE.ONPOINT_ID.HISTORY_DAY")
-    location = session.table("LOCATION")
+    location = session.table("RAW_POS.LOCATION")
 
     # Join the tables
     order_detail = order_detail.join(location, order_detail['LOCATION_ID'] == location['LOCATION_ID'])
