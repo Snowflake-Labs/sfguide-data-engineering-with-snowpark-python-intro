@@ -78,9 +78,9 @@ def main(session: Session) -> str:
     tasks = schema.tasks
 
     # Define the DAG
-    dag_name = "HOL_DAG_local_cli_instructions_no_warehouse"
-    
-    with DAG(dag_name, schedule=timedelta(days=1)) as dag:
+    dag_name = "HOL_DAG_nowarehouse_codespaces"
+    dag = DAG(dag_name, schedule=timedelta(days=1))
+    with dag:
         dag_task1 = DAGTask("LOAD_ORDER_DETAIL_TASK", definition="CALL LOAD_EXCEL_WORKSHEET_TO_TABLE_SP(BUILD_SCOPED_FILE_URL(@FROSTBYTE_RAW_STAGE, 'intro/order_detail.xlsx'), 'order_detail', 'ORDER_DETAIL')")
         dag_task2 = DAGTask("LOAD_LOCATION_TASK", definition="CALL LOAD_EXCEL_WORKSHEET_TO_TABLE_SP(BUILD_SCOPED_FILE_URL(@FROSTBYTE_RAW_STAGE, 'intro/location.xlsx'), 'location', 'LOCATION')")
         dag_task3 = DAGTask("LOAD_DAILY_CITY_METRICS_TASK", definition="CALL LOAD_DAILY_CITY_METRICS_SP()")

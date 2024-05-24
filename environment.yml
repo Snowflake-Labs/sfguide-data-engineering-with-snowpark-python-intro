@@ -4,12 +4,15 @@ channels:
   - nodefaults
 dependencies:
   - python=3.10
-  - snowflake-snowpark-python
   - pip
   - openssl=1.1.1
   - pip:
     # Snowflake
     - snowflake
+<<<<<<< HEAD
     - snowflake-cli-labs
     - openpyxl
     - pandas
+=======
+    - snowflake-snowpark-python
+>>>>>>> c4d46fe7bbe25e11ec5df752da4bcc36baf20038
