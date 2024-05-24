@@ -78,7 +78,7 @@ def main(session: Session) -> str:
     tasks = schema.tasks
 
     # Define the DAG
-    dag_name = "HOL_DAG_nowarehouse_codespaces"
+    dag_name = "HOL_DAG"
     dag = DAG(dag_name, schedule=timedelta(days=1))
     with dag:
         dag_task1 = DAGTask("LOAD_ORDER_DETAIL_TASK", definition="CALL LOAD_EXCEL_WORKSHEET_TO_TABLE_SP(BUILD_SCOPED_FILE_URL(@FROSTBYTE_RAW_STAGE, 'intro/order_detail.xlsx'), 'order_detail', 'ORDER_DETAIL')")
