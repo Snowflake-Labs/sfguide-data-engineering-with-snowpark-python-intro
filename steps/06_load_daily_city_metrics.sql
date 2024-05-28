@@ -34,17 +34,20 @@ def table_exists(session, schema='', name=''):
     return exists
 
 def main(session: Session) -> str:
+    _ = session.sql('ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XLARGE WAIT_FOR_COMPLETION = TRUE').collect()
     schema_name = "HOL_SCHEMA"
     table_name = "DAILY_CITY_METRICS"
 
     # Define the tables
     order_detail = session.table("RAW_POS.ORDER_DETAIL")
+    order_header = session.table("RAW_POS.ORDER_HEADER")
     history_day = session.table("FROSTBYTE_WEATHERSOURCE.ONPOINT_ID.HISTORY_DAY")
     location = session.table("RAW_POS.LOCATION")
 
     # Join the tables
-    order_detail = order_detail.join(location, order_detail['LOCATION_ID'] == location['LOCATION_ID'])
-    order_detail = order_detail.join(history_day, (F.builtin("DATE")(order_detail['ORDER_TS']) == history_day['DATE_VALID_STD']) & (location['ISO_COUNTRY_CODE'] == history_day['COUNTRY']) & (location['CITY'] == history_day['CITY_NAME']))
+    orders = order_header.join(order_detail, order_header['ORDER_ID'] == order_detail['ORDER_ID'])
+    orders = orders.join(location, orders['LOCATION_ID'] == location['LOCATION_ID'])
+    order_detail = orders.join(history_day, (F.builtin("DATE")(order_header['ORDER_TS']) == history_day['DATE_VALID_STD']) & (orders['ISO_COUNTRY_CODE'] == history_day['COUNTRY']) & (orders['CITY'] == history_day['CITY_NAME']))
 
     # Aggregate the data
     final_agg = order_detail.group_by(F.col('DATE_VALID_STD'), F.col('CITY_NAME'), F.col('ISO_COUNTRY_CODE')) \
@@ -62,7 +65,7 @@ def main(session: Session) -> str:
     # If the table doesn't exist then create it
     if not table_exists(session, schema=schema_name, name=table_name):
         final_agg.write.mode("overwrite").save_as_table(table_name)
-
+        _ = session.sql('ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XSMALL').collect()
         return f"Successfully created {table_name}"
     # Otherwise update it
     else:
@@ -71,7 +74,7 @@ def main(session: Session) -> str:
         dcm = session.table(f"{schema_name}.{table_name}")
         dcm.merge(final_agg, (dcm['DATE'] == final_agg['DATE']) & (dcm['CITY_NAME'] == final_agg['CITY_NAME']) & (dcm['COUNTRY_DESC'] == final_agg['COUNTRY_DESC']), \
                             [F.when_matched().update(cols_to_update), F.when_not_matched().insert(cols_to_update)])
-
+        _ = session.sql('ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XSMALL').collect()
         return f"Successfully updated {table_name}"
 $$;
 
