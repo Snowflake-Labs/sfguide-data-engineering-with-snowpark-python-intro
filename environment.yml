@@ -10,5 +10,6 @@ dependencies:
   - pip:
     # Snowflake
     - snowflake-cli-labs
+    - snowflake
     - openpyxl
     - pandas
