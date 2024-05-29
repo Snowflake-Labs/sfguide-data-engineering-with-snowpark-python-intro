@@ -34,16 +34,17 @@ def main(session: Session) -> str:
                             F.round(F.col("AVG_PRECIPITATION_IN"), 2).alias("AVG_PRECIPITATION_INCHES"), \
                         )
 
+    session.use_schema(schema_name)
     # If the table doesn't exist then create it
     if not table_exists(session, schema=schema_name, name=table_name):
-        final_agg.write.mode("overwrite").save_as_table(schema_name.table_name)
+        final_agg.write.mode("overwrite").save_as_table(table_name)
         _ = session.sql('ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XSMALL').collect()
         return f"Successfully created {table_name}"
     # Otherwise update it
     else:
         cols_to_update = {c: final_agg[c] for c in final_agg.schema.names}
 
-        dcm = session.table(f"{schema_name}.{table_name}")
+        dcm = session.table(table_name)
         dcm.merge(final_agg, (dcm['DATE'] == final_agg['DATE']) & (dcm['CITY_NAME'] == final_agg['CITY_NAME']) & (dcm['COUNTRY_DESC'] == final_agg['COUNTRY_DESC']), \
                             [F.when_matched().update(cols_to_update), F.when_not_matched().insert(cols_to_update)])
         _ = session.sql('ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XSMALL').collect()
