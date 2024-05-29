@@ -7,8 +7,6 @@
 
 import time
 from snowflake.snowpark import Session
-#import snowflake.snowpark.types as T
-#import snowflake.snowpark.functions as F
 
 
 POS_TABLES = ['country', 'franchise', 'location', 'menu', 'truck', 'order_header', 'order_detail']

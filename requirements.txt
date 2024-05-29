@@ -1,5 +1,1 @@
-snowflake-snowpark-python[pandas]
-snowflake
-snowflake-cli-labs
-openpyxl
-pandas
+snowflake-snowpark-python

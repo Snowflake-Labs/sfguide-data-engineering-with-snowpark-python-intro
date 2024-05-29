@@ -36,7 +36,7 @@ def main(session: Session) -> str:
 
     # If the table doesn't exist then create it
     if not table_exists(session, schema=schema_name, name=table_name):
-        final_agg.write.mode("overwrite").save_as_table(table_name)
+        final_agg.write.mode("overwrite").save_as_table(schema_name.table_name)
         _ = session.sql('ALTER WAREHOUSE HOL_WH SET WAREHOUSE_SIZE = XSMALL').collect()
         return f"Successfully created {table_name}"
     # Otherwise update it
