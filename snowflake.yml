@@ -1,0 +1,21 @@
+definition_version: 1
+snowpark:
+  project_name: "hol"
+  stage_name: "hol_schema.deployment"
+  src: "app/"
+  
+  procedures:
+    - name: "load_daily_city_metrics_sp"
+      database: "hol_db"
+      schema: "hol_schema"
+      handler: "06_load_daily_city_metrics.main"
+      runtime: "3.10"
+      signature: ""
+      returns: string
+    - name: "load_raw_data_sp"
+      database: "hol_db"
+      schema: "hol_schema"
+      handler: "05_raw_data.load_all_raw_tables"
+      runtime: "3.10"
+      signature: ""
+      returns: string

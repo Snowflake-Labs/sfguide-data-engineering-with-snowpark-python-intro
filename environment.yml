@@ -9,5 +9,5 @@ dependencies:
   - openssl=1.1.1
   - pip:
     # Snowflake
+    - snowflake-cli-labs
     - snowflake
-    - snowflake-cli-labs==0.2.9
