@@ -13,7 +13,7 @@ def main(session: Session) -> str:
     # Define the tables
     order_detail = session.table("RAW_POS.ORDER_DETAIL")
     order_header = session.table("RAW_POS.ORDER_HEADER")
-    history_day = session.table("FROSTBYTE_WEATHERSOURCE.ONPOINT_ID.HISTORY_DAY")
+    history_day = session.table("TB_WEATHERSOURCE.ONPOINT_ID.HISTORY_DAY")
     location = session.table("RAW_POS.LOCATION")
 
     # Join the tables
