@@ -1,1 +1,3 @@
-snowflake-snowpark-python
+snowflake-snowpark-python[pandas]
+snowflake
+snowflake-cli-labs==0.2.9
