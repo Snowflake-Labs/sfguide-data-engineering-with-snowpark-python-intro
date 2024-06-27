@@ -7,3 +7,4 @@ password = mypassword
 rolename = HOL_ROLE
 warehousename = HOL_WH
 dbname = HOL_DB
+schemaname = HOL_SCHEMA
