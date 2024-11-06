@@ -133,3 +133,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+oracle-database-xe-21c-1.0-1.ol7.x86_64.rpm
+oracle-database-xe*.rpm
+oracle-database-xe*
