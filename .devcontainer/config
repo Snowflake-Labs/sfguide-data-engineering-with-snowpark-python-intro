@@ -1,6 +1,7 @@
 # SnowSQL config
 
 [connections.dev]
+# See https://docs.snowflake.com/en/user-guide/admin-account-identifier.
 accountname = myaccount
 username = myusername
 password = mypassword
